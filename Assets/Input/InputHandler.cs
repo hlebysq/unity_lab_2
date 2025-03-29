@@ -8,7 +8,6 @@ public class InputHandler : MonoBehaviour
 
     public delegate void MoveAction(Vector2Int direction);
     public static event MoveAction OnMove;
-    [SerializeField] private GameField _field;
 
     private Vector2 touchStartPos;
     private float swipeThreshold = 50f;
@@ -41,7 +40,6 @@ public class InputHandler : MonoBehaviour
         if (direction != Vector2Int.zero)
         {
             Debug.Log($"Move: {direction}");
-            _field.Turn(direction);
             OnMove?.Invoke(direction);
         }
     }
@@ -57,7 +55,6 @@ public class InputHandler : MonoBehaviour
                 direction = delta.y > 0 ? Vector2Int.up : Vector2Int.down;
 
             Debug.Log($"Swipe: {direction}");
-            _field.Turn(direction);
             OnMove?.Invoke(direction);
         }
     }
